@@ -12,16 +12,16 @@ module.exports = function(router) {
 
   router.post('/alert', function (req, res) {
     db.push("/alert", {
-      message:"Alert, Stranger Danger",
+      message:"Alert: Stranger Danger!",
       timestamp: new Date()
     });
     admins.forEach(function(admin) {
-      var messageToSend = 'ALERT! STRANGER DANGER! :siren: @ ' + new Date();
+      var messageToSend = 'ALERT: STRANGER DANGER! :siren: @ ' + new Date();
       twilioClient.sendSms(admin.phoneNumber, messageToSend);
     });
     res.end(200)("Alert posted");
   });
-  
+
   router.get('/alert', function(req, res) {
     try {
       var data = db.getData("/alert");
