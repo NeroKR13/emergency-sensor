@@ -84,9 +84,7 @@ namespace KinectEmergencySensor
             this.DataContext = this;
             this.kinectBodyViewbox.DataContext = this.kinectBodyView;
 
-            // create a gesture detector for each body (6 bodies => 6 detectors) and create content controls to display results in the UI
-            int col0Row = 0;
-            int col1Row = 0;
+            // create a gesture detector for each body (6 bodies => 6 detectors) and see if either of them matches a gesture
             int maxBodies = this.kinectSensor.BodyFrameSource.BodyCount;
             for (int i = 0; i < maxBodies; ++i)
             {
@@ -94,26 +92,7 @@ namespace KinectEmergencySensor
                 GestureDetector detector = new GestureDetector(this.kinectSensor, result);
                 this.gestureDetectorList.Add(detector);
 
-                // split gesture results across the first two columns of the content grid
-                ContentControl contentControl = new ContentControl();
-                contentControl.Content = this.gestureDetectorList[i].GestureResultView;
-
-                if (i % 2 == 0)
-                {
-                    // Gesture results for bodies: 0, 2, 4
-                    Grid.SetColumn(contentControl, 0);
-                    Grid.SetRow(contentControl, col0Row);
-                    ++col0Row;
-                }
-                else
-                {
-                    // Gesture results for bodies: 1, 3, 5
-                    Grid.SetColumn(contentControl, 1);
-                    Grid.SetRow(contentControl, col1Row);
-                    ++col1Row;
-                }
-
-                //this.contentGrid.Children.Add(contentControl);
+                
             }
         }
 
@@ -231,6 +210,7 @@ namespace KinectEmergencySensor
                 {
                     // loop through all bodies to see if any of the gesture detectors need to be updated
                     int maxBodies = this.kinectSensor.BodyFrameSource.BodyCount;
+                    System.Diagnostics.Debug.WriteLine("BodyCount: " + maxBodies);
                     for (int i = 0; i < maxBodies; ++i)
                     {
                         Body body = this.bodies[i];

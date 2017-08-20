@@ -178,6 +178,11 @@ namespace KinectEmergencySensor
 
                                 if (result != null)
                                 {
+                                    if (result.Detected && result.Confidence > 0.8)
+                                    {
+                                        System.Diagnostics.Debug.WriteLine("Detected: " + result.Detected);
+                                        System.Diagnostics.Debug.WriteLine("Condidence index: " + result.Confidence);
+                                    }
                                     // update the GestureResultView object with new gesture result values
                                     this.GestureResultView.UpdateGestureResult(true, result.Detected, result.Confidence);
                                 }
