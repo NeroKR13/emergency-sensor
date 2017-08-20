@@ -9,5 +9,6 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("gestures/punch.gbd")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("gestures/violentgestures.gbd")]
 
 

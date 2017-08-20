@@ -19,5 +19,4 @@ C:\Users\arwym\Repos\emergency-sensor\KinectEmergencySensor\KinectEmergencySenso
 C:\Users\arwym\Repos\emergency-sensor\KinectEmergencySensor\KinectEmergencySensor\bin\Debug\Gestures\Punch.gbd
 C:\Users\arwym\Repos\emergency-sensor\KinectEmergencySensor\KinectEmergencySensor\obj\Debug\KinectEmergencySensor.csprojResolveAssemblyReference.cache
 C:\Users\arwym\Repos\emergency-sensor\KinectEmergencySensor\KinectEmergencySensor\obj\Debug\KinectEmergencySensor_Content.g.cs
-C:\Users\arwym\Repos\emergency-sensor\KinectEmergencySensor\KinectEmergencySensor\obj\Debug\SimpleWindow.g.cs
-C:\Users\arwym\Repos\emergency-sensor\KinectEmergencySensor\KinectEmergencySensor\obj\Debug\SimpleWindow.baml
+C:\Users\arwym\Repos\emergency-sensor\KinectEmergencySensor\KinectEmergencySensor\bin\Debug\Gestures\ViolentGestures.gbd

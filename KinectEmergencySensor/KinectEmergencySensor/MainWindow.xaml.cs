@@ -45,8 +45,6 @@ namespace KinectEmergencySensor
         /// <summary> List of gesture detectors, there will be one detector created for each potential body (max of 6) </summary>
         private List<GestureDetector> gestureDetectorList = null;
 
-        public int trackedCount = 0;
-
         /// <summary>
         /// Initializes a new instance of the MainWindow class
         /// </summary>
@@ -86,15 +84,13 @@ namespace KinectEmergencySensor
             this.DataContext = this;
             this.kinectBodyViewbox.DataContext = this.kinectBodyView;
 
-            // create a gesture detector for each body (6 bodies => 6 detectors) and see if either of them matches a gesture
+            // create a gesture detector for each body (6 bodies => 6 detectors)
             int maxBodies = this.kinectSensor.BodyFrameSource.BodyCount;
             for (int i = 0; i < maxBodies; ++i)
             {
                 GestureResultView result = new GestureResultView(i, false, false, 0.0f);
                 GestureDetector detector = new GestureDetector(this.kinectSensor, result);
                 this.gestureDetectorList.Add(detector);
-
-                
             }
         }
 
@@ -212,13 +208,10 @@ namespace KinectEmergencySensor
                 {
                     // loop through all bodies to see if any of the gesture detectors need to be updated
                     int maxBodies = this.kinectSensor.BodyFrameSource.BodyCount;
-                    this.trackedCount = 0;
                     for (int i = 0; i < maxBodies; ++i)
                     {
                         Body body = this.bodies[i];
                         ulong trackingId = body.TrackingId;
-
-                        if (body.IsTracked) trackedCount++;
 
                         // if the current body TrackingId changed, update the corresponding gesture detector with the new value
                         if (trackingId != this.gestureDetectorList[i].TrackingId)
