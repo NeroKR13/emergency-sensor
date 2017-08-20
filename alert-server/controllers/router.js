@@ -21,6 +21,7 @@ module.exports = function(router) {
     });
     res.end(200)("Alert posted");
   });
+  
   router.get('/alert', function(req, res) {
     try {
       var data = db.getData("/alert");

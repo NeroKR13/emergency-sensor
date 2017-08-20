@@ -3,27 +3,7 @@
   "version": "1.0.0",
   "description": "Send SMS notifications on exceptions thrown by your Node.js application",
   "main": "index.js",
-  "scripts": {
-    "test": "NODE_ENV=test node_modules/.bin/mocha test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/TwilioDevEd/server-notifications-node"
-  },
-  "keywords": [
-    "twilio",
-    "express",
-    "mongodb",
-    "twiml",
-    "webhooks",
-    "voip"
-  ],
   "author": "Kevin Whinnery",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/TwilioDevEd/server-notifications-node/issues"
-  },
-  "homepage": "https://github.com/TwilioDevEd/server-notifications-node",
   "engines": {
     "node": ">=4.1.0"
   },
