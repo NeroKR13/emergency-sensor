@@ -12,6 +12,7 @@ namespace KinectEmergencySensor
     using Microsoft.Kinect.VisualGestureBuilder;
     using System.Net.Http;
     using System.Net;
+    using System.Collections.Specialized;
 
     /// <summary>
     /// Gesture Detector class which listens for VisualGestureBuilderFrame events from the service
@@ -36,9 +37,6 @@ namespace KinectEmergencySensor
 
         // Keeps track of the number of tracked bodies in each frame update
         private int trackedCount = 0;
-
-        // Http client
-        private static readonly HttpClient httpClient = new HttpClient();
 
         /// <summary>
         /// Initializes a new instance of the GestureDetector class along with the gesture frame source and reader
@@ -241,15 +239,8 @@ namespace KinectEmergencySensor
                                     {
                                         System.Diagnostics.Debug.WriteLine("Detected: " + result.Detected);
                                         System.Diagnostics.Debug.WriteLine("Condidence index: " + result.Confidence);
-                                        //var response = await this.client.PostAsync("http://192.168.1.145:3000/alert", { });
-                                        //var values = new Dictionary<string, string>
-                                        //    {
-                                        //       { "thing1", "hello" },
-                                        //       { "thing2", "world" }
-                                        //    };
-                                        //var content = new FormUrlEncodedContent(values);
-                                        //var response = await this.httpCl.PostAsync("http://192.168.1.145:3000/alert", content);
-                                        //var responseString = await response.Content.ReadAsStringAsync();
+                                        PostAlert();
+
                                     }
                                     // update the GestureResultView object with new gesture result values
                                     this.GestureResultView.UpdateGestureResult(true, result.Detected, result.Confidence);
@@ -270,6 +261,27 @@ namespace KinectEmergencySensor
         {
             // update the GestureResultView object to show the 'Not Tracked' image in the UI
             this.GestureResultView.UpdateGestureResult(false, false, 0.0f);
+        }
+      
+        public void GetAlert()
+        {
+            using (var wb = new WebClient())
+            {
+                var response = wb.DownloadString("http://192.168.1.193:3000/alert");
+            }
+        }
+        
+        public void PostAlert()
+        {
+            string url = "http://192.168.1.145:3000/alert";
+            using (var wb = new WebClient())
+            {
+                var data = new NameValueCollection();
+                //data[""] = "myUser";
+                //data[""] = "myPassword";
+
+                var response = wb.UploadValues(url, "POST", data);
+            }
         }
     }
 }
