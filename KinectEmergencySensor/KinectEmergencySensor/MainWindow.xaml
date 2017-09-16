@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KinectEmergencySensor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Bayamón Smart City - Emergency Gesture Detector">
     <Window.Resources>
         <DataTemplate DataType="{x:Type local:GestureResultView}">
             <Grid Width="Auto" Margin="5" Background="{Binding BodyColor}">
@@ -17,7 +17,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock HorizontalAlignment="Stretch" Text="{Binding BodyIndex, StringFormat='Body Index: {0}'}" FontSize="14" FontFamily="Segoe UI" FontWeight="SemiBold" Margin="5"/>
                 <Image Source="{Binding ImageSource}" Stretch="Uniform" Grid.Row="1" Margin="5"/>
-                <TextBlock Text="{Binding Detected, StringFormat='Seated: {0}'}" FontSize="18" FontFamily="Segoe UI" FontWeight="SemiBold" Grid.Row="2" Margin="5 5 0 0"/>
+                <TextBlock Text="{Binding Detected, StringFormat='Seated: {0}'}" FontSize="18" FontFamily="Segoe UI" FontWeight="SemiBold" Grid.Row="3" Margin="5 5 0 0"/>
                 <TextBlock Text="{Binding Confidence, StringFormat='Confidence: {0}'}" FontSize="18" FontFamily="Segoe UI" FontWeight="SemiBold" Grid.Row="3" Margin="5 0 0 0"/>
             </Grid>
         </DataTemplate>
@@ -34,6 +34,8 @@
             <Image Source="{Binding ImageSource}" Stretch="Uniform" Grid.Row="1" Margin="5"/>
             <TextBlock Text="{Binding Detected, StringFormat='Detected: {0}'}" FontSize="18" FontFamily="Segoe UI" FontWeight="SemiBold" Grid.Row="2" Margin="5 5 0 0"/>
             <TextBlock Text="{Binding Confidence, StringFormat='Confidence: {0}'}" FontSize="18" FontFamily="Segoe UI" FontWeight="SemiBold" Grid.Row="2" Margin="5,28.6,-0.4,0" Height="24" Grid.RowSpan="2" VerticalAlignment="Top"/>
+            <Label Content="Emergency Gesture Detector" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+            <Label Content="Alert!" HorizontalAlignment="Center" Margin="147,5.2,146.8,0" Grid.Row="3" VerticalAlignment="Top" Background="#FFFA1313" Foreground="#FFFAF3F3" HorizontalContentAlignment="Center" Visibility="Hidden" FontSize="24"/>
         </Grid>
     </Viewbox>
 </Window>

@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("curl.exe")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("gestures/punch.gbd")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("gestures/violentgestures.gbd")]
 

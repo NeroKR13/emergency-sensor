@@ -13,6 +13,7 @@ namespace KinectEmergencySensor
     using System.Net.Http;
     using System.Net;
     using System.Collections.Specialized;
+    using System.Diagnostics;
 
     /// <summary>
     /// Gesture Detector class which listens for VisualGestureBuilderFrame events from the service
@@ -37,6 +38,7 @@ namespace KinectEmergencySensor
 
         // Keeps track of the number of tracked bodies in each frame update
         private int trackedCount = 0;
+        private int detectionCount = 0;
 
         /// <summary>
         /// Initializes a new instance of the GestureDetector class along with the gesture frame source and reader
@@ -194,6 +196,7 @@ namespace KinectEmergencySensor
                         {
                             if (body.IsTracked)
                             {
+                                //var posZ = body.Joints[JointType.SpineBase].Position.Z;
                                 this.trackedCount++;
                             }
                         }
@@ -235,11 +238,19 @@ namespace KinectEmergencySensor
 
                                 if (result != null)
                                 {
+                                    // TODO: Measure distance between two bodies to detect violence from one person to the other
                                     if (result.Detected && result.Confidence > 0.8)
                                     {
-                                        System.Diagnostics.Debug.WriteLine("Detected: " + result.Detected);
-                                        System.Diagnostics.Debug.WriteLine("Condidence index: " + result.Confidence);
-                                        PostAlert();
+                                        System.Diagnostics.Debug.WriteLine("Agression detected.");
+                                        System.Diagnostics.Debug.WriteLine("Detection count: " + this.detectionCount);
+                                        this.detectionCount++;
+                                        if (this.detectionCount == 30)
+                                        {
+                                            System.Diagnostics.Debug.WriteLine("Detected: " + result.Detected);
+                                            System.Diagnostics.Debug.WriteLine("Condidence index: " + result.Confidence);
+                                            PostAlert();
+                                            this.detectionCount = 0;
+                                        }
 
                                     }
                                     // update the GestureResultView object with new gesture result values
@@ -276,11 +287,23 @@ namespace KinectEmergencySensor
             string url = "http://192.168.1.145:3000/alert";
             using (var wb = new WebClient())
             {
-                var data = new NameValueCollection();
-                //data[""] = "myUser";
-                //data[""] = "myPassword";
+                //var response = wb.UploadValues(url, "POST", null);
+                //System.Diagnostics.Debug.WriteLine(response);
 
-                var response = wb.UploadValues(url, "POST", data);
+                Process p = new Process();
+                p.StartInfo.FileName = "curl.exe";
+                p.StartInfo.Arguments = "http://192.168.1.152/theaterChase";
+                //p.StartInfo.Arguments = "http://192.168.1.152/blink";
+
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.Start();
+
+                string output = p.StandardOutput.ReadToEnd();
+                p.WaitForExit();
+
+                Console.WriteLine("Output:");
+                Console.WriteLine(output);
             }
         }
     }
